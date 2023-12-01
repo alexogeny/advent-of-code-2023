@@ -2,6 +2,7 @@
 (** on each line, you combine the first digit and last digit (in order) to form a single 2 digit number*)
 (** each calibration value is a line item. we need to find the sum of all of them.*)
 
+
 let read_file_to_list filename =
   let input_channel = open_in filename in
   let rec read_lines acc =
@@ -24,6 +25,13 @@ let read_lines filename =
   |> remove_empty_last_line
   |> Array.of_list
 
+  let remove_non_numbers str =
+    Str.global_replace (Str.regexp "[^0-9]+") "" str
+
+let process_lines lines =
+  Array.map remove_non_numbers lines
+
 let () =
   let lines = read_lines "input.txt" in
-  Array.iter (fun line -> print_endline line) lines
+  let processed_lines = process_lines lines in
+  Array.iter (fun line -> print_endline line) processed_lines

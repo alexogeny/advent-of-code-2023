@@ -1,2 +1,3 @@
 (library
- (name day_1))
+ (name day_1)
+ (libraries str))
